@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrator - Pest Control Inventory Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-role-page="admin">
+    <header>
+      <h1>Administrator Portal</h1>
+      <div class="session-bar">
+        <span id="session-badge" class="session-badge"></span>
+        <button id="logout-button" type="button" class="secondary">Sign Out</button>
+      </div>
+      <nav class="top-nav">
+        <a href="#inventory-section">Inventory</a>
+        <a href="#requests-section">Orders</a>
+        <a href="#setup-section">Setup</a>
+        <a href="#reports-section">Reports</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="inventory-section" class="card">
+        <h2>Add Product</h2>
+        <form id="product-form" class="field-grid">
+          <label>Product Name<input id="name" required /></label>
+          <label>Category<input id="category" required /></label>
+          <label>Quantity<input id="quantity" type="number" min="0" required /></label>
+          <label>Unit<input id="unit" required /></label>
+          <label>Minimum<input id="minimum" type="number" min="0" required /></label>
+          <label>Expiration<input id="expiration" type="date" required /></label>
+          <button type="submit">Add Product</button>
+        </form>
+        <ul id="inventory-list" class="entity-list"></ul>
+      </section>
+
+      <section id="requests-section" class="card">
+        <h2>Current Orders</h2>
+        <ul id="orders-list" class="entity-list"></ul>
+      </section>
+
+      <section id="setup-section" class="card">
+        <h2>Setup - Products Catalog</h2>
+        <form id="setup-product-form" class="field-grid">
+          <label>Product Name<input id="setup-product-name" required /></label>
+          <label>SKU<input id="setup-product-sku" required /></label>
+          <label>Supplier<input id="setup-product-supplier" required /></label>
+          <label>Picture (optional)<input id="setup-product-image" type="file" accept="image/*" /></label>
+          <button type="submit">Add Setup Product</button>
+        </form>
+        <ul id="setup-product-list" class="entity-list"></ul>
+      </section>
+
+      <section id="reports-section" class="card">
+        <h2>Administrative Reports</h2>
+        <div class="service-links report-actions">
+          <button id="run-summary-report" type="button" class="service-link">Summary</button>
+          <button id="run-inventory-report" type="button" class="service-link">Inventory</button>
+          <button id="run-orders-report" type="button" class="service-link">Orders</button>
+        </div>
+        <div id="report-output" class="report-output empty-state">Run a report to view details.</div>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

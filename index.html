@@ -3,23 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pest Control Inventory Manager</title>
+    <title>Pest Control Inventory Manager - Sign In</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header>
       <h1>Pest Control Inventory Manager</h1>
-      <p>Track stock levels, expiration dates, truck counts, setup records, and main office requests.</p>
-      <div class="session-bar">
-        <span id="session-badge" class="session-badge" hidden></span>
-        <button id="logout-button" type="button" class="secondary" hidden>Sign Out</button>
-      </div>
+      <p>Multi-page access for Administrator and Technician users.</p>
     </header>
 
     <main>
-      <section id="auth-screen" class="card view-section">
+      <section class="card auth-card">
         <h2>Sign In</h2>
-        <p class="section-intro">Choose your access level.</p>
         <form id="login-form" class="inline-form auth-form">
           <label>Access Level
             <select id="login-role" required>
@@ -34,233 +29,7 @@
         </form>
         <p class="hint">Demo passwords: admin = <code>admin123</code>, technician = <code>tech123</code>.</p>
       </section>
-
-      <section id="home-screen" class="card view-section" hidden>
-        <h2>Home</h2>
-        <p class="section-intro">Choose a workspace to continue.</p>
-        <div class="home-grid">
-          <button type="button" class="home-tile" data-view-target="counts-view">
-            <span class="tile-title">Inventory Counts</span>
-            <span class="tile-sub">Manage office stock and technician truck counts.</span>
-          </button>
-
-          <button type="button" class="home-tile" data-view-target="requests-view">
-            <span class="tile-title">Inventory Requests</span>
-            <span class="tile-sub">Build and copy DD subset requests to the main office.</span>
-          </button>
-
-          <button type="button" class="home-tile" data-view-target="dashboard-view">
-            <span class="tile-title">Dashboard</span>
-            <span class="tile-sub">View approved products, technicians, locations, orders, trucks, and warehouses.</span>
-          </button>
-
-          <button type="button" class="home-tile" data-view-target="setup-view">
-            <span class="tile-title">Setup Menu</span>
-            <span class="tile-sub">Configure warehouses, trucks, company, technicians, suppliers, and products.</span>
-          </button>
-        </div>
-      </section>
-
-      <section id="dashboard-view" class="view-section" hidden>
-        <div class="subnav"><button type="button" class="secondary" data-go-home>← Back to Home</button></div>
-        <section class="card">
-          <h2>Operational Dashboard</h2>
-          <p class="section-intro">Real-time overview from setup, inventory, and request data.</p>
-          <section class="service-subsection">
-            <h3>Service</h3>
-            <div class="service-links">
-              <button type="button" class="service-link" data-view-target="counts-view">Inventory</button>
-              <button type="button" class="service-link" data-view-target="requests-view">Order</button>
-              <button type="button" class="service-link" data-view-target="tasks-view">Tasks</button>
-              <button type="button" class="service-link" data-view-target="service-products-view">Products</button>
-              <button type="button" class="service-link" data-view-target="scanner-view">Scanner</button>
-            </div>
-          </section>
-          <div class="dashboard-grid">
-            <article class="dash-panel"><h3>Approved Products</h3><ul id="dashboard-approved-products" class="entity-list"></ul></article>
-            <article class="dash-panel"><h3>Technicians</h3><ul id="dashboard-technicians" class="entity-list"></ul></article>
-            <article class="dash-panel"><h3>Locations</h3><ul id="dashboard-locations" class="entity-list"></ul></article>
-            <article class="dash-panel"><h3>Products in Location Lists</h3><ul id="dashboard-products-in-location" class="entity-list"></ul></article>
-            <article class="dash-panel"><h3>Current Orders</h3><ul id="dashboard-current-orders" class="entity-list"></ul></article>
-            <article class="dash-panel"><h3>Trucks</h3><ul id="dashboard-trucks" class="entity-list"></ul></article>
-            <article class="dash-panel"><h3>Warehouses</h3><ul id="dashboard-warehouses" class="entity-list"></ul></article>
-          </div>
-        </section>
-      </section>
-
-      <section id="tasks-view" class="view-section" hidden>
-        <div class="subnav"><button type="button" class="secondary" data-go-home>← Back to Home</button></div>
-        <section class="card">
-          <h2>Service Tasks</h2>
-          <p class="section-intro">Quick task list for technicians and service planning.</p>
-          <ul id="tasks-list" class="entity-list"></ul>
-        </section>
-      </section>
-
-      <section id="service-products-view" class="view-section" hidden>
-        <div class="subnav"><button type="button" class="secondary" data-go-home>← Back to Home</button></div>
-        <section class="card">
-          <h2>Service Products</h2>
-          <p class="section-intro">Approved products available for service work.</p>
-          <ul id="service-products-list" class="entity-list"></ul>
-        </section>
-      </section>
-
-      <section id="scanner-view" class="view-section" hidden>
-        <div class="subnav"><button type="button" class="secondary" data-go-home>← Back to Home</button></div>
-        <section class="card">
-          <h2>Scanner</h2>
-          <p class="section-intro">Use scanner workflow to identify products by barcode/SKU.</p>
-          <div class="empty-state">Scanner integration placeholder: connect camera/barcode input here.</div>
-        </section>
-      </section>
-
-      <section id="counts-view" class="view-section" hidden>
-        <div class="subnav"><button type="button" class="secondary" data-go-home>← Back to Home</button></div>
-
-        <section class="card">
-          <h2>Add Product</h2>
-          <form id="product-form">
-            <div class="field-grid">
-              <label>Product Name<input type="text" id="name" required placeholder="e.g., Rodent Bait Blocks" /></label>
-              <label>Category
-                <select id="category" required>
-                  <option value="">Select one</option><option>Insecticide</option><option>Rodenticide</option><option>Repellent</option><option>Trap</option><option>Sanitizer</option><option>Other</option>
-                </select>
-              </label>
-              <label>Quantity<input type="number" id="quantity" min="0" required /></label>
-              <label>Unit<input type="text" id="unit" required placeholder="e.g., bottles, packs" /></label>
-              <label>Minimum Stock Threshold<input type="number" id="minimum" min="0" required /></label>
-              <label>Expiration Date<input type="date" id="expiration" required /></label>
-            </div>
-            <button type="submit">Add Product</button>
-          </form>
-        </section>
-
-        <section class="card">
-          <div class="toolbar"><h2>Inventory</h2><label class="checkbox"><input type="checkbox" id="show-low-stock" />Show low stock only</label></div>
-          <div id="empty-state" class="empty-state">No products in inventory yet.</div>
-          <table id="inventory-table" hidden>
-            <thead><tr><th>Product</th><th>Category</th><th>Quantity</th><th>Minimum</th><th>Expiration</th><th>Status</th><th>Actions</th></tr></thead>
-            <tbody id="inventory-body"></tbody>
-          </table>
-        </section>
-
-        <section class="card">
-          <h2>Technician Truck Inventory Keeper</h2>
-          <form id="technician-form" class="inline-form">
-            <label>Technician Name<input id="technician-name" type="text" required placeholder="e.g., Alex Rivera" /></label>
-            <label>Truck ID<input id="truck-id" type="text" required placeholder="e.g., TRK-12" /></label>
-            <label>Email<input id="technician-email" type="email" required placeholder="e.g., tech@company.com" /></label>
-            <button type="submit">Add Technician</button>
-          </form>
-          <form id="transfer-form" class="inline-form">
-            <label>Technician<select id="transfer-technician" required><option value="">Select technician</option></select></label>
-            <label>Product<select id="transfer-product" required><option value="">Select product</option></select></label>
-            <label>Qty to Truck<input id="transfer-qty" type="number" min="1" required /></label>
-            <button type="submit">Transfer Stock</button>
-          </form>
-          <div id="technician-empty" class="empty-state">No technician truck inventory records yet.</div>
-          <table id="technician-table" hidden>
-            <thead><tr><th>Technician</th><th>Email</th><th>Truck</th><th>Total Inventory On Hand</th><th>Distinct Items</th><th>Truck Inventory Details</th></tr></thead>
-            <tbody id="technician-body"></tbody>
-          </table>
-        </section>
-      </section>
-
-      <section id="requests-view" class="view-section" hidden>
-        <div class="subnav"><button type="button" class="secondary" data-go-home>← Back to Home</button></div>
-        <section class="card">
-          <div class="toolbar"><h2>Technician DD Subset Order</h2><span class="hint">Order low-stock items from the main office.</span></div>
-          <div id="dd-empty-state" class="empty-state">No low-stock products available for DD subset ordering.</div>
-          <table id="dd-table" hidden>
-            <thead><tr><th>Product</th><th>On Hand</th><th>Minimum</th><th>Suggested Request</th><th>Request Qty</th><th>Add</th></tr></thead>
-            <tbody id="dd-body"></tbody>
-          </table>
-          <h3>Current Request to Main Office</h3>
-          <div id="request-empty" class="empty-state">No items added to request yet.</div>
-          <ul id="request-list" class="request-list" hidden></ul>
-          <button id="copy-request" type="button" class="secondary" hidden>Copy Request Summary</button>
-        </section>
-      </section>
-
-      <section id="setup-view" class="view-section" hidden>
-        <div class="subnav"><button type="button" class="secondary" data-go-home>← Back to Home</button></div>
-
-        <section class="card"><h2>Company</h2>
-          <form id="company-form" class="inline-form">
-            <label>Company Name<input id="company-name" type="text" required /></label>
-            <label>Address<input id="company-address" type="text" required /></label>
-            <label>Phone<input id="company-phone" type="text" required /></label>
-            <button type="submit">Save Company</button>
-          </form>
-          <div id="company-display" class="empty-state">Company profile not set.</div>
-        </section>
-
-        <section class="card"><h2>Warehouses</h2>
-          <form id="warehouse-form" class="inline-form">
-            <label>Warehouse Name<input id="warehouse-name" type="text" required /></label>
-            <label>Location<input id="warehouse-location" type="text" required /></label>
-            <button type="submit">Add Warehouse</button>
-          </form>
-          <ul id="warehouse-list" class="entity-list"></ul>
-        </section>
-
-        <section class="card"><h2>Trucks</h2>
-          <form id="truck-form" class="inline-form">
-            <label>Truck ID<input id="setup-truck-id" type="text" required /></label>
-            <label>Plate Number<input id="setup-truck-plate" type="text" required /></label>
-            <button type="submit">Add Truck</button>
-          </form>
-          <ul id="truck-list" class="entity-list"></ul>
-        </section>
-
-        <section class="card"><h2>Technicians</h2>
-          <form id="setup-technician-form" class="inline-form">
-            <label>Name<input id="setup-technician-name" type="text" required /></label>
-            <label>Phone<input id="setup-technician-phone" type="text" required /></label>
-            <label>Email<input id="setup-technician-email" type="email" required /></label>
-            <button type="submit">Add Technician</button>
-          </form>
-          <ul id="setup-technician-list" class="entity-list"></ul>
-        </section>
-
-        <section class="card"><h2>Suppliers</h2>
-          <form id="supplier-form" class="inline-form">
-            <label>Supplier Name<input id="supplier-name" type="text" required /></label>
-            <label>Contact<input id="supplier-contact" type="text" required /></label>
-            <button type="submit">Add Supplier</button>
-          </form>
-          <ul id="supplier-list" class="entity-list"></ul>
-        </section>
-
-        <section class="card"><h2>Products (Setup Catalog)</h2>
-          <form id="setup-product-form" class="inline-form">
-            <label>Product Name<input id="setup-product-name" type="text" required /></label>
-            <label>SKU<input id="setup-product-sku" type="text" required /></label>
-            <label>Supplier<input id="setup-product-supplier" type="text" required /></label>
-            <label>Picture (optional)<input id="setup-product-image" type="file" accept="image/*" /></label>
-            <button type="submit">Add Product Setup</button>
-          </form>
-          <ul id="setup-product-list" class="entity-list"></ul>
-        </section>
-
-        <section class="card" id="reports-tab">
-          <h2>Administrative Reports</h2>
-          <p class="section-intro">Generate quick operational snapshots for administration.</p>
-          <div class="service-links report-actions">
-            <button type="button" class="service-link" id="run-summary-report">Summary Report</button>
-            <button type="button" class="service-link" id="run-inventory-report">Inventory Report</button>
-            <button type="button" class="service-link" id="run-orders-report">Orders Report</button>
-          </div>
-          <div id="report-output" class="report-output empty-state">Run a report to view details.</div>
-        </section>
-
-      </section>
     </main>
-
-    <template id="row-template"><tr><td data-col="name"></td><td data-col="category"></td><td data-col="quantity"></td><td data-col="minimum"></td><td data-col="expiration"></td><td data-col="status"></td><td><button data-action="consume" type="button">Consume 1</button><button data-action="delete" type="button" class="danger">Delete</button></td></tr></template>
-    <template id="dd-row-template"><tr><td data-col="name"></td><td data-col="quantity"></td><td data-col="minimum"></td><td data-col="suggested"></td><td><input data-col="request-input" type="number" min="1" step="1" /></td><td><button data-action="add-request" type="button">Add to Request</button></td></tr></template>
 
     <script src="app.js" defer></script>
   </body>
