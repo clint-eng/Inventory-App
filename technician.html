@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technician - Pest Control Inventory Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-role-page="technician">
+    <header>
+      <h1>Technician Portal</h1>
+      <div class="session-bar">
+        <span id="session-badge" class="session-badge"></span>
+        <button id="logout-button" type="button" class="secondary">Sign Out</button>
+      </div>
+      <nav class="top-nav">
+        <a href="#tech-products">Products</a>
+        <a href="#tech-orders">Order</a>
+        <a href="#tech-tasks">Tasks</a>
+        <a href="#tech-scanner">Scanner</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="tech-products" class="card">
+        <h2>Approved Products</h2>
+        <ul id="service-products-list" class="entity-list"></ul>
+      </section>
+
+      <section id="tech-orders" class="card">
+        <h2>Create Order Request</h2>
+        <form id="order-form" class="field-grid">
+          <label>Product
+            <select id="order-product"></select>
+          </label>
+          <label>Quantity<input id="order-qty" type="number" min="1" required /></label>
+          <button type="submit">Add Order Request</button>
+        </form>
+        <ul id="orders-list" class="entity-list"></ul>
+      </section>
+
+      <section id="tech-tasks" class="card">
+        <h2>Tasks</h2>
+        <ul id="tasks-list" class="entity-list"></ul>
+      </section>
+
+      <section id="tech-scanner" class="card">
+        <h2>Scanner</h2>
+        <div class="empty-state">Scanner integration placeholder.</div>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
